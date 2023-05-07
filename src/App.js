@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
-import BlogList from './components/BlogList'
 import BlogForm from './components/BlogForm'
+import Blog from './components/Blog'
 import LoginForm from './components/LoginForm'
 import Notification from './components/Notification'
 import Togglable from './components/Togglable'
@@ -99,7 +99,9 @@ const App = () => {
               handeNewBlogUrlChange={({ target }) => setNewBlogUrl(target.value)}
             />
           </Togglable>
-          <BlogList blogs={blogs} />
+          {blogs.map((blog, i) =>
+            <Blog key={i} blog={blog}/>
+          )}
         </div>
         :
         <LoginForm 
