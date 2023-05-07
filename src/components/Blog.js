@@ -1,5 +1,5 @@
 import { useState } from "react"
-const Blog = ({blog}) => {
+const Blog = ({blog, updateBlog}) => {
     const [showAllInfo, setShowAllInfo] = useState(false)
     const blogStyle = {
         paddingTop: 10,
@@ -8,6 +8,28 @@ const Blog = ({blog}) => {
         borderWidth: 1,
         marginBottom: 5
       }
+    
+    const addBlogLikes = (event) => {
+        // const blogObject =
+        //     {
+                // user: blog.user.id,
+                // title: blog.title,
+                // author: blog.author,
+                // url: blog.url,
+                // likes: blog.likes + 1,
+        //     }
+        
+        // const updatedBlog = await blogService.update(blogObject)   
+        // return blog = updatedBlog
+        event.preventDefault()
+        const addLike = blog.likes + 1;
+        updateBlog(blog.id,
+            {
+                ...blog,
+                likes: addLike,
+            }
+        )
+    }
     return (
         <div>
             { !showAllInfo ?
@@ -24,7 +46,7 @@ const Blog = ({blog}) => {
                     {blog.url}
                     <br/>
                     {blog.likes}
-                    <button>like</button>
+                    <button onClick={addBlogLikes}>like</button>
                     <br />
                     <button onClick={() => setShowAllInfo(false)}>hide</button>
                 </div> 

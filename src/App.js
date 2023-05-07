@@ -64,6 +64,12 @@ const App = () => {
 
   const blogFormRef = useRef()
 
+
+  const addBlogLikes = async (id, blogObject) => {
+    const newBlog = await blogService.update(id, blogObject)   
+    setBlogs(blogs.map(blog => blog.id !== id ? blog : newBlog))
+  }
+
   return (
     <div>
       <Notification message={notificationMessage} />
@@ -85,7 +91,7 @@ const App = () => {
             />
           </Togglable>
           {blogs.map((blog, i) =>
-            <Blog key={i} blog={blog}/>
+            <Blog key={i} blog={blog} updateBlog={addBlogLikes}/>
           )}
         </div>
         :
