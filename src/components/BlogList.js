@@ -1,9 +1,8 @@
+import Blog from './Blog'
 const BlogList = ({blogs}) => (
     <div>
       {blogs.map((blog, i) =>
-        <div key={i}>
-            {blog.title} {blog.author}
-        </div> 
+        <Blog key={i} blog={blog}/>
       )}
     </div>
 )
