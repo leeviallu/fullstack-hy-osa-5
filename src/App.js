@@ -17,10 +17,12 @@ const App = () => {
   const [user, setUser] = useState(null)
   const [notificationMessage, setNotificationMessage] = useState(null)
 
+  const fetchBlogs = async () => {
+    const blogs = await blogService.getAll()
+    setBlogs(blogs)
+  }
   useEffect(() => {
-    blogService.getAll().then(blogs =>
-      setBlogs( blogs )
-    )  
+    fetchBlogs()
   }, [])
 
   useEffect(() => {
@@ -53,25 +55,23 @@ const App = () => {
     }
   }
 
-  const addBlog = (event) => {
+  const addBlog = async (event) => {
     event.preventDefault()
     const blogObject = {
       title: newBlogTitle,
       author: newBlogAuthor,
       url: newBlogUrl,
     }
-    blogService
-      .create(blogObject)
-      .then(returnedBlog => {
-      setBlogs(blogs.concat(returnedBlog))
-      setNotificationMessage(`a new blog ${newBlogTitle} by ${newBlogAuthor} added`)
-      setNewBlogTitle('')
-      setNewBlogAuthor('')
-      setNewBlogUrl('')
-      setTimeout(() => {
-        setNotificationMessage(null)
-      }, 5000)
-    })
+    const newBlog = await blogService.create(blogObject)   
+    setBlogs(blogs.concat(newBlog))
+    setNotificationMessage(`a new blog ${newBlogTitle} by ${newBlogAuthor} added`)
+    setNewBlogTitle('')
+    setNewBlogAuthor('')
+    setNewBlogUrl('')
+    setTimeout(() => {
+      setNotificationMessage(null)
+    }, 5000)
+  
   }
   return (
     <div>
