@@ -10,17 +10,6 @@ const Blog = ({blog, updateBlog}) => {
       }
     
     const addBlogLikes = (event) => {
-        // const blogObject =
-        //     {
-                // user: blog.user.id,
-                // title: blog.title,
-                // author: blog.author,
-                // url: blog.url,
-                // likes: blog.likes + 1,
-        //     }
-        
-        // const updatedBlog = await blogService.update(blogObject)   
-        // return blog = updatedBlog
         event.preventDefault()
         const addLike = blog.likes + 1;
         updateBlog(blog.id,

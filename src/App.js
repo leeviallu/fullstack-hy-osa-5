@@ -62,13 +62,12 @@ const App = () => {
     }, 5000)
   }
 
-  const blogFormRef = useRef()
-
-
   const addBlogLikes = async (id, blogObject) => {
     const newBlog = await blogService.update(id, blogObject)   
     setBlogs(blogs.map(blog => blog.id !== id ? blog : newBlog))
   }
+
+  const blogFormRef = useRef()
 
   return (
     <div>
