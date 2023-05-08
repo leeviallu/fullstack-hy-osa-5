@@ -65,6 +65,12 @@ const App = () => {
   const addBlogLikes = async (id, blogObject) => {
     const newBlog = await blogService.update(id, blogObject)   
     setBlogs(blogs.map(blog => blog.id !== id ? blog : newBlog))
+    fetchBlogs()
+  }
+
+  const deleteBlog = async (id) => {
+    await blogService.remove(id)
+    fetchBlogs()
   }
 
   const blogFormRef = useRef()
@@ -88,8 +94,14 @@ const App = () => {
               createBlog={addBlog}
             />
           </Togglable>
-          {blogs.sort((firstItem, secondItem) => secondItem.likes - firstItem.likes).map((blog, i) =>
-            <Blog key={i} blog={blog} updateBlog={addBlogLikes}/>
+          {blogs.sort((blog1, blog2) => blog2.likes - blog1.likes).map((blog, i) =>
+            <Blog 
+              key={i} 
+              blog={blog} 
+              updateBlog={addBlogLikes} 
+              deleteBlog={deleteBlog} 
+              user={user}
+            />
           )}
         </div>
         :
