@@ -68,7 +68,6 @@ const App = () => {
   }
 
   const blogFormRef = useRef()
-
   return (
     <div>
       <Notification message={notificationMessage} />
@@ -89,7 +88,7 @@ const App = () => {
               createBlog={addBlog}
             />
           </Togglable>
-          {blogs.map((blog, i) =>
+          {blogs.sort((firstItem, secondItem) => secondItem.likes - firstItem.likes).map((blog, i) =>
             <Blog key={i} blog={blog} updateBlog={addBlogLikes}/>
           )}
         </div>
