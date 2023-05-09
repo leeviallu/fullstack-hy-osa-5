@@ -50,7 +50,7 @@ test('renders all blog info', async () => {
 })
 
 
-test('renders blog title', async () => {
+test('like button is clicked twice', async () => {
   const blog = {
     title: 'Paras blogi',
     url: 'www.paras.fi',
